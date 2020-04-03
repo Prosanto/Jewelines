@@ -17,7 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.Jewelines.app.formfragment.ApplicantInformationFragment;
+import com.Jewelines.app.formfragment.CoastalLocationsFragment;
+import com.Jewelines.app.formfragment.GeneralInformationFragment;
 import com.Jewelines.app.formfragment.LocationInformationFragment;
+import com.Jewelines.app.formfragment.LossHistoryFragment;
 import com.Jewelines.app.mailsend.GMailSender;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
@@ -68,6 +71,19 @@ public class GetinsuredActivity extends AppCompatActivity {
                     LocationInformationFragment stepperTwo = new LocationInformationFragment();
                     return stepperTwo;
 
+                case 2:
+                    CoastalLocationsFragment steppeThree = new CoastalLocationsFragment();
+                    return steppeThree;
+
+                case 3:
+                    LossHistoryFragment stepperFour = new LossHistoryFragment();
+                    return stepperFour;
+
+                case 4:
+                    GeneralInformationFragment stepperfive = new GeneralInformationFragment();
+                    return stepperfive;
+
+
             }
 
             return null;
@@ -75,7 +91,7 @@ public class GetinsuredActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 5;
         }
 
         @Nullable
@@ -92,6 +108,21 @@ public class GetinsuredActivity extends AppCompatActivity {
                 case 1:
                     builder.setTitle("Step 2");
                     builder.setSubtitle("Location Information");
+                    break;
+
+                case 2:
+                    builder.setTitle("Step 3");
+                    builder.setSubtitle("Coastal Locations");
+                    break;
+
+                case 3:
+                    builder.setTitle("Step 4");
+                    builder.setSubtitle("Loss History");
+                    break;
+
+                case 4:
+                    builder.setTitle("Step 5");
+                    builder.setSubtitle("General Information");
                     break;
 
 
