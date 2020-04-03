@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:text="Jewel is a unique insurance program underwritten by Lloyds of London and exclusively managed by MarketScout.The like kind and quality coverage and claim features are complimented by the deep expertise of industry veterans LoriAnn Lowery and Rotem Fartok.Jewel brings innovation to the insurance industry and peace of mind that your most valued items are protected.You have found your solution, look no further than Jewel."
+        android:textColor="@color/gray_dark">
+
+    </TextView>
+
+
+</LinearLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_quote"
+            android:icon="@drawable/icon_quote"
+            android:title="@string/menu_quote" />
+
+        <item
+            android:id="@+id/nav_getinsured"
+            android:icon="@drawable/icon_quote"
+            android:title="@string/menu_getinsured" />
+
+
+        <item
+            android:id="@+id/nav_contactus"
+            android:icon="@drawable/icon_contactus"
+            android:title="@string/menu_claim" />
+        <item
+            android:id="@+id/nav_aboutus"
+            android:icon="@drawable/icon_aboutus"
+            android:title="@string/menu_aboutus" />
+
+    </group>
+
+
+</menu>
