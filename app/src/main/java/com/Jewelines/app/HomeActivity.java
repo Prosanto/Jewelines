@@ -1,7 +1,10 @@
 package com.Jewelines.app;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.Jewelines.app.fragment.AbouttusFragment;
@@ -34,6 +37,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Fragment fragment;
@@ -41,6 +47,9 @@ public class HomeActivity extends AppCompatActivity
     private FragmentTransaction transaction;
     private TextView toolbar_title;
     private Context mContext;
+
+    final private int REQUEST_CODE_ASK_PERMISSIONS_STORGE = 100;
+    private List<String> permissions = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +91,20 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_quote) {
             replessFragment(0);
         } else if (id == R.id.nav_getinsured) {
+
+            if (Build.VERSION.SDK_INT > 22) {
+                String storagePermission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+                int hasstoragePermission = checkSelfPermission(storagePermission);
+                if (hasstoragePermission != PackageManager.PERMISSION_GRANTED) {
+                    permissions.add(storagePermission);
+                }
+                if (!permissions.isEmpty()) {
+                    String[] params = permissions.toArray(new String[permissions.size()]);
+                    requestPermissions(params, REQUEST_CODE_ASK_PERMISSIONS_STORGE);
+                } else {
+                    //savePDT();
+                }
+            }
             Intent mm = new Intent(HomeActivity.this, GetinsuredActivity.class);
             startActivity(mm);
 
@@ -112,5 +135,22 @@ public class HomeActivity extends AppCompatActivity
         transaction.replace(R.id.main_container, fragment).commit();
 
 
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS_STORGE:
+                if (grantResults.length > 0) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        //savePDT();
+                    } else {
+                        //finish();
+                    }
+                }
+                break;
+
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }

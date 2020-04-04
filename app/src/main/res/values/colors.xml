@@ -24,5 +24,6 @@
 
     <color name="color_button">#984a4a</color>
     <color name="color_background"> #f8f8f8</color>
+    <color name="text_head_color"> #6753d8</color>
 
 </resources>

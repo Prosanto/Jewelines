@@ -29,7 +29,7 @@ import com.stepstone.stepper.viewmodel.StepViewModel;
 
 import java.util.HashMap;
 
-public class GetinsuredActivity extends AppCompatActivity {
+public class GetinsuredActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = GetinsuredActivity.class.getSimpleName();
     private Context mContext;
     private LinearLayout layoutBack;
@@ -45,7 +45,19 @@ public class GetinsuredActivity extends AppCompatActivity {
 
     private void initUi() {
         mStepperLayout = (StepperLayout) this.findViewById(R.id.stepperLayout);
+        layoutBack=(LinearLayout)findViewById(R.id.layoutBack);
+        layoutBack.setOnClickListener(this);
         mStepperLayout.setAdapter(new FormAdapter(getSupportFragmentManager(), this));
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.layoutBack:
+                finish();
+                break;
+        }
 
     }
 
@@ -64,7 +76,8 @@ public class GetinsuredActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    ApplicantInformationFragment stepperOne = new ApplicantInformationFragment();
+//                    ApplicantInformationFragment stepperOne = new ApplicantInformationFragment();
+                    GeneralInformationFragment stepperOne = new GeneralInformationFragment();
                     return stepperOne;
 
                 case 1:

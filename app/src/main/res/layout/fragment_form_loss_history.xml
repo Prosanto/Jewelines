@@ -1,10 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="Loss History :"
+                android:textColor="@color/text_head_color"
+                android:textSize="@dimen/bold_text_size">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|right"
+                android:text="Step 4-5"
+                android:textSize="@dimen/normal_text_size">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Dat oe loss"
+            android:textSize="@dimen/normal_text_size"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+        </TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:textSize="@dimen/normal_text_size"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:layout_height="@dimen/edittext_height">
+
+        </EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Type"
+            android:textSize="@dimen/normal_text_size"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+        </TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:textSize="@dimen/normal_text_size"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:layout_height="@dimen/edittext_height">
+
+        </EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Description"
+            android:textSize="@dimen/normal_text_size"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+        </TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:textSize="@dimen/normal_text_size"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:layout_height="@dimen/edittext_height">
+
+        </EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Amount"
+            android:textSize="@dimen/normal_text_size"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+        </TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:textSize="@dimen/normal_text_size"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:layout_height="@dimen/edittext_height">
+
+        </EditText>
 
 
 
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

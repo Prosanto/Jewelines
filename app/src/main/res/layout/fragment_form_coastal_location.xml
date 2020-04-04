@@ -1,10 +1,428 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="For Coastal Locations :"
+                android:textColor="@color/text_head_color"
+                android:textSize="@dimen/bold_text_size">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|right"
+                android:text="Step 3-5"
+                android:textSize="@dimen/normal_text_size">
+
+            </TextView>
+
+        </LinearLayout>
 
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Built-in safe/vault?"
+            android:textSize="@dimen/normal_text_size">
+
+        </TextView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet">
+
+
+            <Spinner
+                android:id="@+id/spn_builtin_type1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:hint="Location #1"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/normal_text_size">
+
+            </Spinner>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet">
+
+
+            <Spinner
+                android:id="@+id/spn_builtin_type2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:hint="Location #2"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/normal_text_size">
+
+            </Spinner>
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Domestic employees? (duties, age, length of service)"
+            android:textSize="@dimen/normal_text_size">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edn_domesticem_type1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #1"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edn_domesticem_type2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #2"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Is building undergoing renvovations?"
+            android:textSize="@dimen/normal_text_size">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edn_renovation_type1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #1"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edn_renovation_type2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #2"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Is location within 2.5 miles of coastal waters? If yes, answer the following questions"
+            android:textSize="@dimen/normal_text_size">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edn_coastelwater_type1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #1"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edn_coastelwater_type2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #2"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Do all exterior openings have storm shutters?"
+            android:textSize="@dimen/normal_text_size">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edn_shutter_type1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #1"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edn_shutter_type2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #2"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Proximity to water"
+            android:textSize="@dimen/normal_text_size">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edn_proximity_type1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #1"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edn_proximity_type2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #2"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Property elevation"
+            android:textSize="@dimen/normal_text_size">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edn_elevation_type1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #1"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edn_elevation_type2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #2"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Is location within 250 ft. of a designated brush area? If yes, provide the following info"
+            android:textSize="@dimen/normal_text_size">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edn_brusharea_type1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #1"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edn_brusharea_type2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #2"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Brush clearance (all sides)"
+            android:textSize="@dimen/normal_text_size">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edn_brushclearence_type1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #1"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edn_brushclearence_type2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Location #2"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="How many times do you travel per year?"
+            android:textSize="@dimen/normal_text_size">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edn_travelyear_type1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Domestic"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edn_travelyear_type2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Overseas"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Longest duration (# of days)"
+            android:textSize="@dimen/normal_text_size">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edn_longduration"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner_inputwhitet"
+            android:hint="Domestic"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/normal_text_size">
+
+        </EditText>
+    </LinearLayout>
+</ScrollView>

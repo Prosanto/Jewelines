@@ -31,6 +31,7 @@ public class LossHistoryFragment extends Fragment  implements Step, BlockingStep
 
     @Override
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
+        callback.goToNextStep();
 
     }
 
@@ -41,6 +42,7 @@ public class LossHistoryFragment extends Fragment  implements Step, BlockingStep
 
     @Override
     public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
+        callback.goToPrevStep();
 
     }
 
