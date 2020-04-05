@@ -1,6 +1,7 @@
 package com.Jewelines.app.formfragment;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,10 +27,13 @@ import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
-public class GeneralInformationFragment extends Fragment implements Step, BlockingStep, CompoundButton.OnCheckedChangeListener {
+public class GeneralInformationFragment extends Fragment implements Step, BlockingStep,View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private View view;
     private String checkStrin1, checkStrin2, checkStrin3, checkStrin4, checkStrin5, checkStrin6, checkStrin7, checkStrin8, checkStrin9, checkStrin10, checkStrin11;
     private CheckBox chk_yes_1, chk_yes_2, chk_yes_3, chk_yes_4, chk_yes_5, chk_yes_6, chk_yes_7,
@@ -41,6 +46,9 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
             edt_exp_date, edt_current_homeowner, edt_remark;
     final private int REQUEST_CODE_ASK_PERMISSIONS_STORGE = 100;
     private List<String> permissions = new ArrayList<String>();
+    final Calendar myCalendar = Calendar.getInstance();
+    DatePickerDialog date;
+    private int year, month, day;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,6 +110,7 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
         chk_no_10.setOnCheckedChangeListener(this);
         chk_yes_11.setOnCheckedChangeListener(this);
         chk_no_11.setOnCheckedChangeListener(this);
+        edt_exp_date.setOnClickListener(this);
 
 //        checkBoxOnclick();
 
@@ -142,8 +151,40 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
     public void onError(@NonNull VerificationError error) {
 
     }
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.edt_exp_date:
+                datePick(edt_exp_date);
+                break;
 
 
+        }
+    }
+    private void datePick(final EditText ed) {
+        final Calendar cq = Calendar.getInstance();
+        year = cq.get(Calendar.YEAR);
+        month = cq.get(Calendar.MONTH);
+        day = cq.get(Calendar.DAY_OF_MONTH);
+        date = new DatePickerDialog(getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        ed.setText(updateLabel());
+                    }
+                }, year, month, day);
+        date.show();
+
+    }
+    private String updateLabel() {
+        String myFormat = "d MMM yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        return "" + sdf.format(myCalendar.getTime());
+    }
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
@@ -151,42 +192,36 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 if (chk_yes_1.isChecked()) {
                     chk_no_1.setChecked(false);
                     checkStrin1 = "Yes";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_no_1:
                 if (chk_no_1.isChecked()) {
                     chk_yes_1.setChecked(false);
                     checkStrin1 = "NO";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_yes_2:
                 if (chk_yes_2.isChecked()) {
                     chk_no_2.setChecked(false);
                     checkStrin2 = "Yes";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_no_2:
                 if (chk_no_2.isChecked()) {
                     chk_yes_2.setChecked(false);
                     checkStrin2 = "NO";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_yes_3:
                 if (chk_yes_3.isChecked()) {
                     chk_no_3.setChecked(false);
                     checkStrin3 = "Yes";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_no_3:
                 if (chk_no_3.isChecked()) {
                     chk_yes_3.setChecked(false);
                     checkStrin3 = "NO";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
 
@@ -195,14 +230,12 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 if (chk_yes_4.isChecked()) {
                     chk_no_4.setChecked(false);
                     checkStrin4 = "Yes";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_no_4:
                 if (chk_no_4.isChecked()) {
                     chk_yes_4.setChecked(false);
                     checkStrin4 = "NO";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
 
@@ -210,14 +243,12 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 if (chk_yes_5.isChecked()) {
                     chk_no_5.setChecked(false);
                     checkStrin5 = "Yes";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_no_5:
                 if (chk_no_5.isChecked()) {
                     chk_yes_5.setChecked(false);
                     checkStrin5 = "NO";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
 
@@ -225,14 +256,12 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 if (chk_yes_6.isChecked()) {
                     chk_no_6.setChecked(false);
                     checkStrin6 = "Yes";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_no_6:
                 if (chk_no_6.isChecked()) {
                     chk_yes_6.setChecked(false);
                     checkStrin6 = "NO";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
 
@@ -240,28 +269,24 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 if (chk_yes_7.isChecked()) {
                     chk_no_7.setChecked(false);
                     checkStrin7 = "Yes";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_no_7:
                 if (chk_no_7.isChecked()) {
                     chk_yes_7.setChecked(false);
                     checkStrin7 = "NO";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_yes_8:
                 if (chk_yes_8.isChecked()) {
                     chk_no_8.setChecked(false);
                     checkStrin8 = "Yes";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_no_8:
                 if (chk_no_8.isChecked()) {
                     chk_yes_8.setChecked(false);
                     checkStrin8 = "NO";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
 
@@ -269,28 +294,24 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 if (chk_yes_9.isChecked()) {
                     chk_no_9.setChecked(false);
                     checkStrin9 = "Yes";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_no_9:
                 if (chk_no_9.isChecked()) {
                     chk_yes_9.setChecked(false);
                     checkStrin9 = "NO";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_yes_10:
                 if (chk_yes_10.isChecked()) {
                     chk_no_10.setChecked(false);
                     checkStrin10 = "Yes";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_no_10:
                 if (chk_no_10.isChecked()) {
                     chk_yes_10.setChecked(false);
                     checkStrin10 = "NO";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
 
@@ -298,14 +319,12 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 if (chk_yes_11.isChecked()) {
                     chk_no_11.setChecked(false);
                     checkStrin11 = "Yes";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
             case R.id.chk_no_11:
                 if (chk_no_11.isChecked()) {
                     chk_yes_11.setChecked(false);
                     checkStrin11 = "NO";
-                    Log.i("Test", checkStrin1);
                 }
                 break;
         }

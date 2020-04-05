@@ -42,8 +42,7 @@ public class CreatePdf {
     public static void createDocument(Context mContext) {
         try {
 
-            String root = Environment
-                    .getExternalStorageDirectory().toString();
+            String root = Environment.getExternalStorageDirectory().toString();
             File myDir = new File(root + "/Jewelines_pdf");
             myDir.mkdirs();
             String fname = "Jewelines" + ".pdf";
