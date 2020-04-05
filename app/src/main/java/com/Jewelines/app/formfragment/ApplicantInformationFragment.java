@@ -31,11 +31,12 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class ApplicantInformationFragment extends Fragment implements Step, BlockingStep, View.OnClickListener , AdapterView.OnItemSelectedListener {
+public class ApplicantInformationFragment extends Fragment implements Step, BlockingStep, View.OnClickListener, AdapterView.OnItemSelectedListener {
     private View view;
     final Calendar myCalendar = Calendar.getInstance();
-    DatePickerDialog.OnDateSetListener date;
-    private String married_status="";
+    DatePickerDialog date;
+    private String married_status = "";
+    private int year, month, day;
     List<String> spnList = new ArrayList<String>();
     private EditText edt_app_firstname;
     private EditText edt_app_lastname;
@@ -66,27 +67,27 @@ public class ApplicantInformationFragment extends Fragment implements Step, Bloc
     }
 
 
-    private void initUI(View view){
+    private void initUI(View view) {
 
-        edt_app_firstname=view.findViewById(R.id.edt_app_firstname);
-        edt_app_lastname=view.findViewById(R.id.edt_app_lastname);
-        edt_coapp_firstname=view.findViewById(R.id.edt_coapp_firstname);
-        edt_coapp_lastname=view.findViewById(R.id.edt_coapp_lastname);
-        edt_dob=view.findViewById(R.id.edt_dob);
-        edt_address=view.findViewById(R.id.edt_address);
-        edt_city=view.findViewById(R.id.edt_city);
-        edt_state=view.findViewById(R.id.edt_state);
-        edt_zip=view.findViewById(R.id.edt_zip);
-        edt_email=view.findViewById(R.id.edt_email);
-        edt_app_occupation=view.findViewById(R.id.edt_app_occupation);
-        edt_employuer_street=view.findViewById(R.id.edt_employuer_street);
-        edt_employuer_city=view.findViewById(R.id.edt_employuer_city);
-        edt_employuer_state=view.findViewById(R.id.edt_employuer_state);
-        edt_employuer_zip=view.findViewById(R.id.edt_employuer_zip);
-        edt_years_with_current=view.findViewById(R.id.edt_years_with_current);
-        edt_years_with_prior=view.findViewById(R.id.edt_years_with_prior);
-        spinner_married=view.findViewById(R.id.spinner_married);
-        edt_dob_final=view.findViewById(R.id.edt_dob_final);
+        edt_app_firstname = view.findViewById(R.id.edt_app_firstname);
+        edt_app_lastname = view.findViewById(R.id.edt_app_lastname);
+        edt_coapp_firstname = view.findViewById(R.id.edt_coapp_firstname);
+        edt_coapp_lastname = view.findViewById(R.id.edt_coapp_lastname);
+        edt_dob = view.findViewById(R.id.edt_dob);
+        edt_address = view.findViewById(R.id.edt_address);
+        edt_city = view.findViewById(R.id.edt_city);
+        edt_state = view.findViewById(R.id.edt_state);
+        edt_zip = view.findViewById(R.id.edt_zip);
+        edt_email = view.findViewById(R.id.edt_email);
+        edt_app_occupation = view.findViewById(R.id.edt_app_occupation);
+        edt_employuer_street = view.findViewById(R.id.edt_employuer_street);
+        edt_employuer_city = view.findViewById(R.id.edt_employuer_city);
+        edt_employuer_state = view.findViewById(R.id.edt_employuer_state);
+        edt_employuer_zip = view.findViewById(R.id.edt_employuer_zip);
+        edt_years_with_current = view.findViewById(R.id.edt_years_with_current);
+        edt_years_with_prior = view.findViewById(R.id.edt_years_with_prior);
+        spinner_married = view.findViewById(R.id.spinner_married);
+        edt_dob_final = view.findViewById(R.id.edt_dob_final);
         spnList.add("MARRIED");
         spnList.add("UNMARRIED");
         edt_dob.setOnClickListener(this);
@@ -98,6 +99,7 @@ public class ApplicantInformationFragment extends Fragment implements Step, Bloc
         spinner_married.setOnItemSelectedListener(this);
 
     }
+
     private void viewWebView(View view) {
 
     }
@@ -138,48 +140,42 @@ public class ApplicantInformationFragment extends Fragment implements Step, Bloc
 
 
     private void datePick(final EditText ed) {
-        date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                ed.setText(updateLabel());
-            }
-
-        };
-
-
+        final Calendar cq = Calendar.getInstance();
+        year = cq.get(Calendar.YEAR);
+        month = cq.get(Calendar.MONTH);
+        day = cq.get(Calendar.DAY_OF_MONTH);
+        date = new DatePickerDialog(getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        ed.setText(updateLabel());
+                    }
+                }, year, month, day);
+        date.show();
 
     }
 
     public void onClick(View v) {
 
-        switch(v.getId()){
+        switch (v.getId()) {
 
             case R.id.edt_dob:
-
-                new DatePickerDialog(getActivity(), date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                 datePick(edt_dob);
                 break;
 
             case R.id.edt_dob_final:
-
-                new DatePickerDialog(getActivity(), date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                 datePick(edt_dob_final);
                 break;
         }
     }
+
     private String updateLabel() {
         String myFormat = "d MMM yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        return ""+sdf.format(myCalendar.getTime());
+        return "" + sdf.format(myCalendar.getTime());
     }
 
     @Override
@@ -200,29 +196,29 @@ public class ApplicantInformationFragment extends Fragment implements Step, Bloc
 
     }
 
-    private void saveData(){
+    private void saveData() {
         AppConstant.appInfo.clear();
-        AppConstant.appInfo.add("Applicant’s First Name"+";"+edt_app_firstname.getText().toString()+" ");
-        AppConstant.appInfo.add("Applicant’s Last Name"+";"+edt_app_lastname.getText().toString()+" ");
-        AppConstant.appInfo.add("Co-Applicant First Name"+";"+edt_coapp_firstname.getText().toString()+" ");
-        AppConstant.appInfo.add("Co-Applicant Last Name"+";"+edt_coapp_lastname.getText().toString()+" ");
-        AppConstant.appInfo.add("Date of birth"+";"+edt_dob.getText().toString()+" ");
-        AppConstant.appInfo.add("Mailing Address"+";"+edt_address.getText().toString()+" , "+
-                edt_city.getText().toString()+" , "+
-                edt_state.getText().toString()+" , "+
-                edt_zip.getText().toString()+" ");
+        AppConstant.appInfo.add("Applicant’s First Name" + ";" + edt_app_firstname.getText().toString() + " ");
+        AppConstant.appInfo.add("Applicant’s Last Name" + ";" + edt_app_lastname.getText().toString() + " ");
+        AppConstant.appInfo.add("Co-Applicant First Name" + ";" + edt_coapp_firstname.getText().toString() + " ");
+        AppConstant.appInfo.add("Co-Applicant Last Name" + ";" + edt_coapp_lastname.getText().toString() + " ");
+        AppConstant.appInfo.add("Date of birth" + ";" + edt_dob.getText().toString() + " ");
+        AppConstant.appInfo.add("Mailing Address" + ";" + edt_address.getText().toString() + " , " +
+                edt_city.getText().toString() + " , " +
+                edt_state.getText().toString() + " , " +
+                edt_zip.getText().toString() + " ");
 
-        AppConstant.appInfo.add("Email Address"+";"+edt_email.getText().toString()+" ");
-        AppConstant.appInfo.add("Applicant(s) occupation – state nature of business if self-employed or retired"+";"+edt_app_occupation.getText().toString()+" ");
-        AppConstant.appInfo.add("Applicant(s) employer address"+";"+edt_employuer_street.getText().toString()+" , "+
-                edt_employuer_city.getText().toString()+" , "+
-                edt_employuer_state.getText().toString()+" , "+
-                edt_employuer_zip.getText().toString()+" ");
+        AppConstant.appInfo.add("Email Address" + ";" + edt_email.getText().toString() + " ");
+        AppConstant.appInfo.add("Applicant(s) occupation – state nature of business if self-employed or retired" + ";" + edt_app_occupation.getText().toString() + " ");
+        AppConstant.appInfo.add("Applicant(s) employer address" + ";" + edt_employuer_street.getText().toString() + " , " +
+                edt_employuer_city.getText().toString() + " , " +
+                edt_employuer_state.getText().toString() + " , " +
+                edt_employuer_zip.getText().toString() + " ");
 
-        AppConstant.appInfo.add("Years with current employer"+";"+edt_years_with_current.getText().toString()+" ");
-        AppConstant.appInfo.add("Years with prior employer"+";"+edt_years_with_prior.getText().toString()+" ");
-        AppConstant.appInfo.add("Marital status"+";"+married_status+" ");
-        AppConstant.appInfo.add("Date of birth"+";"+edt_dob_final.getText().toString()+" ");
+        AppConstant.appInfo.add("Years with current employer" + ";" + edt_years_with_current.getText().toString() + " ");
+        AppConstant.appInfo.add("Years with prior employer" + ";" + edt_years_with_prior.getText().toString() + " ");
+        AppConstant.appInfo.add("Marital status" + ";" + married_status + " ");
+        AppConstant.appInfo.add("Date of birth" + ";" + edt_dob_final.getText().toString() + " ");
 
         Log.i("Test", Arrays.toString(AppConstant.appInfo.toArray()));
     }

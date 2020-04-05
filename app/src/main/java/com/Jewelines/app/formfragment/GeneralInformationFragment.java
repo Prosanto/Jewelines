@@ -113,9 +113,7 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
 
     @Override
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
-//        callback.goToNextStep();
-//        saveData();
-//        CreatePdf.createDocument();
+
     }
 
     @Override
@@ -326,7 +324,9 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
             } else {
                 saveData();
                 CreatePdf.createDocument();
-                Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Pdf Saved on Jewelines_pdf", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
+
             }
         }
     }
@@ -338,7 +338,8 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         saveData();
                         CreatePdf.createDocument();
-                        Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Pdf Saved on Jewelines_pdf", Toast.LENGTH_SHORT).show();
+                        getActivity().finish();
                     } else {
                         //finish();
                     }
