@@ -1,31 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/gray_xlight"
+    >
 
-    <Button
-        android:id="@+id/btn_addnew"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="Add New"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold" />
     <LinearLayout
         android:id="@+id/row_linear"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@color/gray_dark"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -86,13 +70,7 @@
 
 
     </LinearLayout>
-    <ListView android:id="@+id/loss_listview"
-        android:layout_width="match_parent"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_height="match_parent">
 
-    </ListView>
 
 
 </LinearLayout>

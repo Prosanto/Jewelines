@@ -1,5 +1,8 @@
 package com.Jewelines.app.formfragment;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +25,9 @@ import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GeneralInformationFragment extends Fragment implements Step, BlockingStep, CompoundButton.OnCheckedChangeListener {
     private View view;
     private String checkStrin1, checkStrin2, checkStrin3, checkStrin4, checkStrin5, checkStrin6, checkStrin7, checkStrin8, checkStrin9, checkStrin10, checkStrin11;
@@ -33,7 +39,8 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
 
     private EditText edt_current_jewel, edt_camount_cover,
             edt_exp_date, edt_current_homeowner, edt_remark;
-
+    final private int REQUEST_CODE_ASK_PERMISSIONS_STORGE = 100;
+    private List<String> permissions = new ArrayList<String>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,16 +113,15 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
 
     @Override
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
-        callback.goToNextStep();
-        saveData();
-        CreatePdf.createDocument();
+//        callback.goToNextStep();
+//        saveData();
+//        CreatePdf.createDocument();
     }
 
     @Override
     public void onCompleteClicked(StepperLayout.OnCompleteClickedCallback callback) {
-        saveData();
-        CreatePdf.createDocument();
-        Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
+        getPermission();
+
     }
 
     @Override
@@ -307,7 +313,42 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
         }
     }
 
+    private void getPermission(){
+        if (Build.VERSION.SDK_INT > 22) {
+            String storagePermission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+            int hasstoragePermission = getActivity().checkSelfPermission(storagePermission);
+            if (hasstoragePermission != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(storagePermission);
+            }
+            if (!permissions.isEmpty()) {
+                String[] params = permissions.toArray(new String[permissions.size()]);
+                requestPermissions(params, REQUEST_CODE_ASK_PERMISSIONS_STORGE);
+            } else {
+                saveData();
+                CreatePdf.createDocument();
+                Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS_STORGE:
+                if (grantResults.length > 0) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        saveData();
+                        CreatePdf.createDocument();
+                        Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //finish();
+                    }
+                }
+                break;
 
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
     private void saveData() {
         AppConstant.general_inifo.clear();
 

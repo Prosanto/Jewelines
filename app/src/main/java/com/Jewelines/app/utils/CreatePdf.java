@@ -20,7 +20,6 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class CreatePdf {
-    //    private static String FILE = "c:/temp/FirstPdf.pdf";
     private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
     private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
@@ -42,7 +41,7 @@ public class CreatePdf {
                     .getExternalStorageDirectory().toString();
             File myDir = new File(root + "/saved_pdf");
             myDir.mkdirs();
-            String fname = "Test" + ".pdf";
+            String fname = "Jewelines" + ".pdf";
             File filePDD = new File(myDir, fname);
             String pdfFilename = filePDD.getAbsolutePath();
             Document document = new Document();
@@ -53,6 +52,7 @@ public class CreatePdf {
             addApplicationInfromation(document);
             addLocationInfromation(document);
             addCoastelInfromation(document);
+            addLossInfromation(document);
             addGeneralInfromation(document);
             document.close();
         } catch (Exception e) {
@@ -126,6 +126,16 @@ public class CreatePdf {
         addEmptyLine(subPara, 1);
 
     }
+
+    public static void addLossInfromation(Document document) throws DocumentException {
+
+        Paragraph subPara = new Paragraph("Loss History", subFont);
+        addEmptyLine(subPara, 1);
+        document.add(subPara);
+        createTable(document, AppConstant.loss_historydate, 4);
+        addEmptyLine(subPara, 1);
+
+    }
     public static void createTable(Document subCatPart, ArrayList<String> myList, int tableRow)
             throws DocumentException {
         PdfPTable table = new PdfPTable(tableRow);
@@ -148,15 +158,23 @@ public class CreatePdf {
         if (tableRow == 2) {
             for (int i = 0; i < myList.size(); i++) {
                 Log.i("Mylist", "" + myList.get(i));
-                table.addCell(StringUtility.getFirst(myList.get(i)));
-                table.addCell(StringUtility.getSecond(myList.get(i)));
+                table.addCell(StringUtility.getFirst(myList.get(i),";"));
+                table.addCell(StringUtility.getSecond(myList.get(i),";"));
             }
-        } else {
+        } else if(tableRow == 3){
             for (int i = 0; i < myList.size(); i++) {
                 Log.i("Mylist", "" + myList.get(i));
-                table.addCell(StringUtility.getFirst(myList.get(i)));
-                table.addCell(StringUtility.getSecond(myList.get(i)));
-                table.addCell(StringUtility.getThird(myList.get(i)));
+                table.addCell(StringUtility.getFirst(myList.get(i),";"));
+                table.addCell(StringUtility.getSecond(myList.get(i),";"));
+                table.addCell(StringUtility.getThird(myList.get(i),";"));
+            }
+        }else {
+            for (int i = 0; i < myList.size(); i++) {
+                Log.i("Mylist", "" + myList.get(i));
+                table.addCell(StringUtility.getFirst(myList.get(i),";"));
+                table.addCell(StringUtility.getSecond(myList.get(i),";"));
+                table.addCell(StringUtility.getThird(myList.get(i),";"));
+                table.addCell(StringUtility.getFourth(myList.get(i),";"));
             }
         }
 

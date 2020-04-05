@@ -13,33 +13,42 @@ import java.util.Date;
 
 public class StringUtility {
 
-    public static final String getFirst(String string) {
+    public static final String getFirst(String string,String sepaRator) {
         String[] arrSplit = null;
         try {
-             arrSplit = string.split(";");
+             arrSplit = string.split(sepaRator);
         } catch (Exception e) {
 
         }
         return arrSplit[0];
     }
-    public static final String getSecond(String string) {
+    public static final String getSecond(String string,String sepaRator) {
         String[] arrSplit = null;
         try {
-            arrSplit = string.split(";");
+            arrSplit = string.split(sepaRator);
 
         } catch (Exception e) {
 
         }
         return arrSplit[1];
     }
-    public static final String getThird(String string) {
+    public static final String getThird(String string,String sepaRator) {
         String[] arrSplit = null;
         try {
-            arrSplit = string.split(";");
+            arrSplit = string.split(sepaRator);
         } catch (Exception e) {
 
         }
         return arrSplit[2];
+    }
+    public static final String getFourth(String string,String sepaRator) {
+        String[] arrSplit = null;
+        try {
+            arrSplit = string.split(sepaRator);
+        } catch (Exception e) {
+
+        }
+        return arrSplit[3];
     }
     static String toCamelCase(String s){
         String[] parts = s.split("_");
