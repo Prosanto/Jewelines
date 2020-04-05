@@ -76,8 +76,8 @@ public class GetinsuredActivity extends AppCompatActivity implements View.OnClic
 
             switch (position) {
                 case 0:
-//                    ApplicantInformationFragment stepperOne = new ApplicantInformationFragment();
-                    GeneralInformationFragment stepperOne = new GeneralInformationFragment();
+                    ApplicantInformationFragment stepperOne = new ApplicantInformationFragment();
+//                    GeneralInformationFragment stepperOne = new GeneralInformationFragment();
                     return stepperOne;
 
                 case 1:

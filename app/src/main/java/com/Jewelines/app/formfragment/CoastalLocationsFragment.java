@@ -112,7 +112,7 @@ public class CoastalLocationsFragment extends Fragment  implements Step, Blockin
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
         callback.goToNextStep();
         saveData();
-//        CreatePdf.createDocument();
+
 
     }
 
@@ -166,25 +166,25 @@ public class CoastalLocationsFragment extends Fragment  implements Step, Blockin
         AppConstant.coastal_location.clear();
 
         AppConstant.coastal_location.add("Built-in safe/vault?"+";"+
-                spinnerValue1+";"+spinnerValue1);
+                spinnerValue1+";"+spinnerValue1+" ");
         AppConstant.coastal_location.add("Domestic employees?(duties, age, length of service)"+";"+
-                edn_domesticem_type1.getText().toString()+";"+edn_domesticem_type2.getText().toString());
+                edn_domesticem_type1.getText().toString()+";"+edn_domesticem_type2.getText().toString()+" ");
         AppConstant.coastal_location.add("Is building undergoing renvovations?"+";"+
-                edn_renovation_type1.getText().toString()+";"+edn_renovation_type2.getText().toString());
+                edn_renovation_type1.getText().toString()+";"+edn_renovation_type2.getText().toString()+" ");
         AppConstant.coastal_location.add("Is location within 2.5 miles of coastal waters? If yes, answer the following questions."+";"+
-                edn_coastelwater_type1.getText().toString()+";"+edn_coastelwater_type2.getText().toString());
+                edn_coastelwater_type1.getText().toString()+";"+edn_coastelwater_type2.getText().toString()+" ");
         AppConstant.coastal_location.add("Do all exterior openings have storm shutters?"+";"+
-                edn_shutter_type1.getText().toString()+";"+edn_shutter_type2.getText().toString());
+                edn_shutter_type1.getText().toString()+";"+edn_shutter_type2.getText().toString()+" ");
         AppConstant.coastal_location.add("Proximity to water"+";"+
-                edn_proximity_type1.getText().toString()+";"+edn_proximity_type2.getText().toString());
+                edn_proximity_type1.getText().toString()+";"+edn_proximity_type2.getText().toString()+" ");
         AppConstant.coastal_location.add("Property elevation"+";"+
-                edn_elevation_type1.getText().toString()+";"+edn_elevation_type2.getText().toString());
+                edn_elevation_type1.getText().toString()+";"+edn_elevation_type2.getText().toString()+" ");
         AppConstant.coastal_location.add("Is location within 250 ft. of a designated brush area? If yes, provide the following info"+";"+
-                edn_brusharea_type1.getText().toString()+";"+edn_brusharea_type2.getText().toString());
+                edn_brusharea_type1.getText().toString()+";"+edn_brusharea_type2.getText().toString()+" ");
         AppConstant.coastal_location.add("Brush clearance (all sides)"+";"+
-                edn_brushclearence_type1.getText().toString()+";"+edn_brushclearence_type2.getText().toString());
+                edn_brushclearence_type1.getText().toString()+";"+edn_brushclearence_type2.getText().toString()+" ");
         AppConstant.coastal_location.add("How many times do you travel per year?"+";"+
-                edn_travelyear_type1.getText().toString()+";"+edn_travelyear_type2.getText().toString());
+                edn_travelyear_type1.getText().toString()+";"+edn_travelyear_type2.getText().toString()+" ");
         AppConstant.coastal_location.add("Longest duration (# of days)"+";"+
                 edn_longduration.getText().toString()+";"+"  ");
     }

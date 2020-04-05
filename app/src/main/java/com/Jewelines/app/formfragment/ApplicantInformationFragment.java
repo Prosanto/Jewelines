@@ -2,6 +2,7 @@ package com.Jewelines.app.formfragment;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.stepstone.stepper.VerificationError;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -200,27 +202,29 @@ public class ApplicantInformationFragment extends Fragment implements Step, Bloc
 
     private void saveData(){
         AppConstant.appInfo.clear();
-        AppConstant.appInfo.add("Applicant’s First Name"+";"+edt_app_firstname.getText().toString());
-        AppConstant.appInfo.add("Applicant’s Last Name"+";"+edt_app_lastname.getText().toString());
-        AppConstant.appInfo.add("Co-Applicant First Name"+";"+edt_coapp_firstname.getText().toString());
-        AppConstant.appInfo.add("Co-Applicant Last Name"+";"+edt_coapp_lastname.getText().toString());
-        AppConstant.appInfo.add("Date of birth"+";"+edt_dob.getText().toString());
+        AppConstant.appInfo.add("Applicant’s First Name"+";"+edt_app_firstname.getText().toString()+" ");
+        AppConstant.appInfo.add("Applicant’s Last Name"+";"+edt_app_lastname.getText().toString()+" ");
+        AppConstant.appInfo.add("Co-Applicant First Name"+";"+edt_coapp_firstname.getText().toString()+" ");
+        AppConstant.appInfo.add("Co-Applicant Last Name"+";"+edt_coapp_lastname.getText().toString()+" ");
+        AppConstant.appInfo.add("Date of birth"+";"+edt_dob.getText().toString()+" ");
         AppConstant.appInfo.add("Mailing Address"+";"+edt_address.getText().toString()+" , "+
                 edt_city.getText().toString()+" , "+
                 edt_state.getText().toString()+" , "+
-                edt_zip.getText().toString());
+                edt_zip.getText().toString()+" ");
 
-        AppConstant.appInfo.add("Email Address"+";"+edt_email.getText().toString());
-        AppConstant.appInfo.add("Applicant(s) occupation – state nature of business if self-employed or retired"+";"+edt_app_occupation.getText().toString());
+        AppConstant.appInfo.add("Email Address"+";"+edt_email.getText().toString()+" ");
+        AppConstant.appInfo.add("Applicant(s) occupation – state nature of business if self-employed or retired"+";"+edt_app_occupation.getText().toString()+" ");
         AppConstant.appInfo.add("Applicant(s) employer address"+";"+edt_employuer_street.getText().toString()+" , "+
                 edt_employuer_city.getText().toString()+" , "+
                 edt_employuer_state.getText().toString()+" , "+
-                edt_employuer_zip.getText().toString());
+                edt_employuer_zip.getText().toString()+" ");
 
-        AppConstant.appInfo.add("Years with current employer"+";"+edt_years_with_current.getText().toString());
-        AppConstant.appInfo.add("Years with prior employer"+";"+edt_years_with_prior.getText().toString());
-        AppConstant.appInfo.add("Marital status"+";"+married_status);
-        AppConstant.appInfo.add("Date of birth"+";"+edt_dob_final.getText().toString());
+        AppConstant.appInfo.add("Years with current employer"+";"+edt_years_with_current.getText().toString()+" ");
+        AppConstant.appInfo.add("Years with prior employer"+";"+edt_years_with_prior.getText().toString()+" ");
+        AppConstant.appInfo.add("Marital status"+";"+married_status+" ");
+        AppConstant.appInfo.add("Date of birth"+";"+edt_dob_final.getText().toString()+" ");
+
+        Log.i("Test", Arrays.toString(AppConstant.appInfo.toArray()));
     }
 
 

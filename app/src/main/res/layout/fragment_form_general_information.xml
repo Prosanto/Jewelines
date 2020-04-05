@@ -466,7 +466,7 @@
             android:layout_height="wrap_content">
 
         </TextView>
-        <EditText
+        <EditText android:id="@+id/edt_current_jewel"
             android:layout_width="match_parent"
             android:textSize="@dimen/normal_text_size"
             android:layout_marginTop="5dp"
@@ -483,7 +483,7 @@
             android:layout_height="wrap_content">
 
         </TextView>
-        <EditText
+        <EditText android:id="@+id/edt_camount_cover"
             android:layout_width="match_parent"
             android:textSize="@dimen/normal_text_size"
             android:layout_marginTop="5dp"
@@ -500,7 +500,7 @@
             android:layout_height="wrap_content">
 
         </TextView>
-        <EditText
+        <EditText android:id="@+id/edt_exp_date"
             android:layout_width="match_parent"
             android:textSize="@dimen/normal_text_size"
             android:layout_marginTop="5dp"
@@ -517,7 +517,7 @@
             android:layout_height="wrap_content">
 
         </TextView>
-        <EditText
+        <EditText android:id="@+id/edt_current_homeowner"
             android:layout_width="match_parent"
             android:textSize="@dimen/normal_text_size"
             android:layout_marginTop="5dp"
@@ -545,13 +545,13 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
-                <CheckBox
+                <CheckBox android:id="@+id/chk_yes_11"
                     android:layout_width="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_height="wrap_content">
 
                 </CheckBox>
-                <CheckBox
+                <CheckBox android:id="@+id/chk_no_11"
                     android:layout_width="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_height="wrap_content">
@@ -568,7 +568,7 @@
             android:layout_height="wrap_content">
 
         </TextView>
-        <EditText
+        <EditText android:id="@+id/edt_remark"
             android:layout_width="match_parent"
             android:textSize="@dimen/normal_text_size"
             android:layout_marginTop="5dp"

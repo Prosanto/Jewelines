@@ -53,6 +53,7 @@ public class CreatePdf {
             addApplicationInfromation(document);
             addLocationInfromation(document);
             addCoastelInfromation(document);
+            addGeneralInfromation(document);
             document.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,7 +117,15 @@ public class CreatePdf {
 
     }
 
+    public static void addGeneralInfromation(Document document) throws DocumentException {
 
+        Paragraph subPara = new Paragraph("General Information", subFont);
+        addEmptyLine(subPara, 1);
+        document.add(subPara);
+        createTable(document, AppConstant.general_inifo, 2);
+        addEmptyLine(subPara, 1);
+
+    }
     public static void createTable(Document subCatPart, ArrayList<String> myList, int tableRow)
             throws DocumentException {
         PdfPTable table = new PdfPTable(tableRow);

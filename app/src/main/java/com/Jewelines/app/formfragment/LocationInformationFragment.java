@@ -103,7 +103,6 @@ public class LocationInformationFragment extends Fragment  implements Step, Bloc
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
         callback.goToNextStep();
         saveData();
-        CreatePdf.createDocument();
 
     }
 
@@ -138,32 +137,32 @@ public class LocationInformationFragment extends Fragment  implements Step, Bloc
         AppConstant.locationInfo_2.clear();
         AppConstant.locationInfo_1.add("Primary Home Address – if different from above"+";"+
                 edt_phome_add.getText().toString()+" , "+edt_phome_city.getText().toString()+" , "+
-                edt_phome_state.getText().toString()+" , "+edt_phome_zip.getText().toString());
+                edt_phome_state.getText().toString()+" , "+edt_phome_zip.getText().toString()+" ");
         AppConstant.locationInfo_1.add("Secondary Address (if applicable)"+";"+
                 edt_sec_address.getText().toString()+" , "+edt_sec_city.getText().toString()+" , "+
-                edt_sec_state.getText().toString()+" , "+edt_sec_zip.getText().toString());
+                edt_sec_state.getText().toString()+" , "+edt_sec_zip.getText().toString()+" ");
         AppConstant.locationInfo_1.add("Number of years at present primary residence"+";"+
-                edt_nofy_primary.getText().toString());
+                edt_nofy_primary.getText().toString()+" ");
         AppConstant.locationInfo_1.add("Number of years at prior primary residence"+";"+
-                edt_nofy_prior_primary.getText().toString());
+                edt_nofy_prior_primary.getText().toString()+" ");
         AppConstant.locationInfo_2.add("Construction Type (Frame, Masonry,Non-Conbustible, Modified Fire Resistive)"+";"+
-                edt_const_type1.getText().toString()+";"+edt_const_type2.getText().toString());
+                edt_const_type1.getText().toString()+";"+edt_const_type2.getText().toString()+" ");
         AppConstant.locationInfo_2.add("Year Built – if home is older than 20yrs.Provide updates to electrical, plumbing HVAC & roof - sq. ft"+";"+
-                edt_yourbuilt_type1.getText().toString()+";"+edt_yourbuilt_type2.getText().toString());
+                edt_yourbuilt_type1.getText().toString()+";"+edt_yourbuilt_type2.getText().toString()+" ");
         AppConstant.locationInfo_2.add("Square ft"+";"+
-                edt_sqrft_type1.getText().toString()+";"+edt_sqrft_type2.getText().toString());
+                edt_sqrft_type1.getText().toString()+";"+edt_sqrft_type2.getText().toString()+" ");
         AppConstant.locationInfo_2.add("Usage (primary, secondary, etc.)"+";"+
-                edt_usage_type1.getText().toString()+";"+edt_usage_type2.getText().toString());
+                edt_usage_type1.getText().toString()+";"+edt_usage_type2.getText().toString()+" ");
         AppConstant.locationInfo_2.add("Number of stories"+";"+
-                edt_nofstories_type1.getText().toString()+";"+edt_nofstories_type2.getText().toString());
+                edt_nofstories_type1.getText().toString()+";"+edt_nofstories_type2.getText().toString()+" ");
         AppConstant.locationInfo_2.add("Number of families"+";"+
-                edt_noffamilies_type1.getText().toString()+";"+edt_noffamilies_type2.getText().toString());
+                edt_noffamilies_type1.getText().toString()+";"+edt_noffamilies_type2.getText().toString()+" ");
         AppConstant.locationInfo_2.add("Burglar protective devices (monitored, local)"+";"+
-                edt_regproc_type1.getText().toString()+";"+edt_regproc_type2.getText().toString());
+                edt_regproc_type1.getText().toString()+";"+edt_regproc_type2.getText().toString()+" ");
         AppConstant.locationInfo_2.add("Fire protective devices(monitored, local)"+";"+
-                edt_fireproc_type1.getText().toString()+";"+edt_fireproc_type2.getText().toString());
+                edt_fireproc_type1.getText().toString()+";"+edt_fireproc_type2.getText().toString()+" ");
         AppConstant.locationInfo_2.add("Other protective devices"+";"+
-                edt_otherproc_type1.getText().toString()+";"+edt_otherproc_type2.getText().toString());
+                edt_otherproc_type1.getText().toString()+";"+edt_otherproc_type2.getText().toString()+" ");
     }
 
 }

@@ -3,10 +3,12 @@ package com.Jewelines.app.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class StringUtility {
@@ -24,6 +26,7 @@ public class StringUtility {
         String[] arrSplit = null;
         try {
             arrSplit = string.split(";");
+
         } catch (Exception e) {
 
         }
