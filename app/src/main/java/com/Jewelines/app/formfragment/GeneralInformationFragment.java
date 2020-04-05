@@ -323,9 +323,9 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 requestPermissions(params, REQUEST_CODE_ASK_PERMISSIONS_STORGE);
             } else {
                 saveData();
-                CreatePdf.createDocument();
+                CreatePdf.createDocument(getActivity());
                 Toast.makeText(getActivity(), "Pdf Saved on Jewelines_pdf", Toast.LENGTH_SHORT).show();
-                getActivity().finish();
+                //getActivity().finish();
 
             }
         }
@@ -337,9 +337,9 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 if (grantResults.length > 0) {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         saveData();
-                        CreatePdf.createDocument();
+                        CreatePdf.createDocument(getActivity());
                         Toast.makeText(getActivity(), "Pdf Saved on Jewelines_pdf", Toast.LENGTH_SHORT).show();
-                        getActivity().finish();
+                       // getActivity().finish();
                     } else {
                         //finish();
                     }

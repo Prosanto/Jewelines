@@ -1,7 +1,12 @@
 package com.Jewelines.app.utils;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+
+import androidx.core.content.FileProvider;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -34,7 +39,7 @@ public class CreatePdf {
     }
 
 
-    public static void createDocument() {
+    public static void createDocument(Context mContext) {
         try {
 
             String root = Environment
@@ -55,6 +60,11 @@ public class CreatePdf {
             addLossInfromation(document);
             addGeneralInfromation(document);
             document.close();
+
+
+            sharePdf(pdfFilename, mContext);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -136,6 +146,7 @@ public class CreatePdf {
         addEmptyLine(subPara, 1);
 
     }
+
     public static void createTable(Document subCatPart, ArrayList<String> myList, int tableRow)
             throws DocumentException {
         PdfPTable table = new PdfPTable(tableRow);
@@ -158,23 +169,23 @@ public class CreatePdf {
         if (tableRow == 2) {
             for (int i = 0; i < myList.size(); i++) {
                 Log.i("Mylist", "" + myList.get(i));
-                table.addCell(StringUtility.getFirst(myList.get(i),";"));
-                table.addCell(StringUtility.getSecond(myList.get(i),";"));
+                table.addCell(StringUtility.getFirst(myList.get(i), ";"));
+                table.addCell(StringUtility.getSecond(myList.get(i), ";"));
             }
-        } else if(tableRow == 3){
+        } else if (tableRow == 3) {
             for (int i = 0; i < myList.size(); i++) {
                 Log.i("Mylist", "" + myList.get(i));
-                table.addCell(StringUtility.getFirst(myList.get(i),";"));
-                table.addCell(StringUtility.getSecond(myList.get(i),";"));
-                table.addCell(StringUtility.getThird(myList.get(i),";"));
+                table.addCell(StringUtility.getFirst(myList.get(i), ";"));
+                table.addCell(StringUtility.getSecond(myList.get(i), ";"));
+                table.addCell(StringUtility.getThird(myList.get(i), ";"));
             }
-        }else {
+        } else {
             for (int i = 0; i < myList.size(); i++) {
                 Log.i("Mylist", "" + myList.get(i));
-                table.addCell(StringUtility.getFirst(myList.get(i),";"));
-                table.addCell(StringUtility.getSecond(myList.get(i),";"));
-                table.addCell(StringUtility.getThird(myList.get(i),";"));
-                table.addCell(StringUtility.getFourth(myList.get(i),";"));
+                table.addCell(StringUtility.getFirst(myList.get(i), ";"));
+                table.addCell(StringUtility.getSecond(myList.get(i), ";"));
+                table.addCell(StringUtility.getThird(myList.get(i), ";"));
+                table.addCell(StringUtility.getFourth(myList.get(i), ";"));
             }
         }
 
@@ -211,5 +222,21 @@ public class CreatePdf {
     }
 
 
+    public static void sharePdf(String fileName, Context mContext) {
+
+        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+        File fileWithinMyDir = new File(fileName);
+        if (fileWithinMyDir.exists()) {
+            Uri imageUri = FileProvider.getUriForFile(
+                    mContext,
+                    "com.Jewelines.app.provider", new File(fileName));
+            intentShareFile.setType("application/pdf");
+            intentShareFile.putExtra(Intent.EXTRA_STREAM, imageUri);
+            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                    "");
+            intentShareFile.putExtra(Intent.EXTRA_TEXT, "");
+            mContext.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+        }
+    }
 
 }
