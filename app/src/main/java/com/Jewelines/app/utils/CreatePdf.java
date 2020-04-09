@@ -8,11 +8,14 @@ import android.util.Log;
 
 import androidx.core.content.FileProvider;
 
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.List;
 import com.itextpdf.text.ListItem;
 import com.itextpdf.text.Paragraph;
@@ -22,6 +25,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CreatePdf {
@@ -126,12 +130,14 @@ public class CreatePdf {
 
     }
 
-    public static void addGeneralInfromation(Document document) throws DocumentException {
+    public static void addGeneralInfromation(Document document) throws DocumentException, IOException {
 
         Paragraph subPara = new Paragraph("General Information", subFont);
         addEmptyLine(subPara, 1);
         document.add(subPara);
         createTable(document, AppConstant.general_inifo, 2);
+        createSignatureTable(document);
+
         addEmptyLine(subPara, 1);
 
     }
@@ -165,6 +171,8 @@ public class CreatePdf {
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         c1.setPadding(5.0f);
         table.addCell(c1);*/
+
+
         if (tableRow == 2) {
             for (int i = 0; i < myList.size(); i++) {
                 Log.i("Mylist", "" + myList.get(i));
@@ -173,7 +181,7 @@ public class CreatePdf {
             }
         } else if (tableRow == 3) {
             for (int i = 0; i < myList.size(); i++) {
-                Log.i("Mylist", "" + myList.get(i));
+
                 table.addCell(StringUtility.getFirst(myList.get(i), ";"));
                 table.addCell(StringUtility.getSecond(myList.get(i), ";"));
                 table.addCell(StringUtility.getThird(myList.get(i), ";"));
@@ -197,12 +205,34 @@ public class CreatePdf {
 
     }
 
-    public static PdfPCell getRowCell(String text) {
-        PdfPCell cell = new PdfPCell(new Paragraph(text));
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setPadding(5.0f);
-        cell.setBorderWidthBottom(0);
-        cell.setBorderWidthTop(0);
+
+    public static void createSignatureTable(Document subCatPart)
+            throws DocumentException, IOException {
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/Jewelines_pdf");
+        myDir.mkdirs();
+        String fname = "Signature_1" + ".jpg";
+        File filePDD = new File(myDir, fname);
+        String pdfFilename = filePDD.getAbsolutePath();
+        if(filePDD.exists()){
+            Log.i("pdfFilename", "" + "File Exist");
+        }else {
+            Log.i("pdfFilename", "" + "File  not Exist");
+        }
+
+        PdfPTable table = new PdfPTable(2);
+        table.setWidthPercentage(100);
+        table.addCell(createImageCell(pdfFilename));
+        table.addCell(createImageCell(pdfFilename));
+        subCatPart.add(table);
+
+
+
+    }
+
+    public static PdfPCell createImageCell(String path) throws DocumentException, IOException {
+        Image img = Image.getInstance(path);
+        PdfPCell cell = new PdfPCell(img, true);
         return cell;
     }
 

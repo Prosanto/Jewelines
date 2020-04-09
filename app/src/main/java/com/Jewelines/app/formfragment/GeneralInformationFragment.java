@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import com.Jewelines.app.R;
 import com.Jewelines.app.utils.AppConstant;
 import com.Jewelines.app.utils.CreatePdf;
+import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
@@ -43,7 +44,7 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
             chk_no_8, chk_no_9, chk_no_10, chk_no_11;
 
     private EditText edt_current_jewel, edt_camount_cover,
-            edt_exp_date, edt_current_homeowner, edt_remark;
+            edt_exp_date, edt_current_homeowner;
     final private int REQUEST_CODE_ASK_PERMISSIONS_STORGE = 100;
     private List<String> permissions = new ArrayList<String>();
     final Calendar myCalendar = Calendar.getInstance();
@@ -63,7 +64,6 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
         edt_camount_cover = view.findViewById(R.id.edt_camount_cover);
         edt_exp_date = view.findViewById(R.id.edt_exp_date);
         edt_current_homeowner = view.findViewById(R.id.edt_current_homeowner);
-        edt_remark = view.findViewById(R.id.edt_remark);
 
         chk_yes_1 = view.findViewById(R.id.chk_yes_1);
         chk_yes_2 = view.findViewById(R.id.chk_yes_2);
@@ -112,6 +112,9 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
         chk_no_11.setOnCheckedChangeListener(this);
         edt_exp_date.setOnClickListener(this);
 
+
+
+
 //        checkBoxOnclick();
 
     }
@@ -122,12 +125,13 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
 
     @Override
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
-
+        callback.goToNextStep();
+        getPermission();
     }
 
     @Override
     public void onCompleteClicked(StepperLayout.OnCompleteClickedCallback callback) {
-        getPermission();
+
 
     }
 
@@ -342,8 +346,7 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 requestPermissions(params, REQUEST_CODE_ASK_PERMISSIONS_STORGE);
             } else {
                 saveData();
-                CreatePdf.createDocument(getActivity());
-                Toast.makeText(getActivity(), "Pdf Saved on Jewelines_pdf", Toast.LENGTH_SHORT).show();
+
                 //getActivity().finish();
 
             }
@@ -356,8 +359,7 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 if (grantResults.length > 0) {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         saveData();
-                        CreatePdf.createDocument(getActivity());
-                        Toast.makeText(getActivity(), "Pdf Saved on Jewelines_pdf", Toast.LENGTH_SHORT).show();
+
                        // getActivity().finish();
                     } else {
                         //finish();
@@ -404,7 +406,9 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 edt_exp_date.getText().toString()+" ");
         AppConstant.general_inifo.add("Current homeowners carrier" + ";" +
                 edt_current_homeowner.getText().toString()+" ");
-        AppConstant.general_inifo.add("Remarks" + ";" +
-                edt_remark.getText().toString()+" ");
+
+
+
+
     }
 }

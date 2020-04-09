@@ -21,6 +21,7 @@ import com.Jewelines.app.formfragment.CoastalLocationsFragment;
 import com.Jewelines.app.formfragment.GeneralInformationFragment;
 import com.Jewelines.app.formfragment.LocationInformationFragment;
 import com.Jewelines.app.formfragment.LossHistoryFragment;
+import com.Jewelines.app.formfragment.SignatureFragment;
 import com.Jewelines.app.mailsend.GMailSender;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
@@ -95,6 +96,9 @@ public class GetinsuredActivity extends AppCompatActivity implements View.OnClic
                 case 4:
                     GeneralInformationFragment stepperfive = new GeneralInformationFragment();
                     return stepperfive;
+                case 5:
+                    SignatureFragment signature = new SignatureFragment();
+                    return signature;
 
 
             }
@@ -104,7 +108,7 @@ public class GetinsuredActivity extends AppCompatActivity implements View.OnClic
 
         @Override
         public int getCount() {
-            return 5;
+            return 6;
         }
 
         @Nullable
@@ -137,7 +141,10 @@ public class GetinsuredActivity extends AppCompatActivity implements View.OnClic
                     builder.setTitle("Step 5");
                     builder.setSubtitle("General Information");
                     break;
-
+                case 5:
+                    builder.setTitle("Step 6");
+                    builder.setSubtitle("General Information");
+                    break;
 
                 default:
                     throw new IllegalArgumentException("Unsupported position: " + position);
