@@ -9,6 +9,8 @@
 
     <string name="menu_quote">Quote</string>
     <string name="menu_getinsured"> Get Insured</string>
+    <string name="menu_customquote"> Custom quote</string>
+
 
 
     <string name="menu_claim">Contact Us</string>

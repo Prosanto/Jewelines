@@ -120,7 +120,7 @@ public class QuoteValueActivity extends AppCompatActivity {
             quoteValue = (float) ((Double.parseDouble(value) * 1.3));
             quoteValue=quoteValue/100;
         } else {
-            quoteValue = (float) ((Double.parseDouble(value) * 1.2));
+            quoteValue = (float) ((Double.parseDouble(value) * 1.4));
             quoteValue=quoteValue/100;
 
         }

@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.Jewelines.app.fragment.AbouttusFragment;
 import com.Jewelines.app.fragment.ContactusFragment;
+import com.Jewelines.app.fragment.CustomQuoteFragment;
 import com.Jewelines.app.fragment.QuoteFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -98,6 +99,9 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_aboutus) {
             replessFragment(2);
         }
+        else if (id == R.id.nav_customquote) {
+            replessFragment(3);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -114,6 +118,10 @@ public class HomeActivity extends AppCompatActivity
         } else if (type == 2) {
             fragment = new AbouttusFragment();
             toolbar_title.setText("" + getResources().getString(R.string.menu_aboutus));
+        }
+        else if (type == 3) {
+            fragment = new CustomQuoteFragment();
+            toolbar_title.setText("" + getResources().getString(R.string.menu_customquote));
         }
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();

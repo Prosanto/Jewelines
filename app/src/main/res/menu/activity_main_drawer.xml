@@ -13,6 +13,10 @@
             android:icon="@drawable/icon_quote"
             android:title="@string/menu_getinsured" />
 
+        <item
+            android:id="@+id/nav_customquote"
+            android:icon="@drawable/icon_quote"
+            android:title="@string/menu_customquote" />
 
         <item
             android:id="@+id/nav_contactus"
