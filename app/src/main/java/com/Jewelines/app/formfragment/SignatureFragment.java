@@ -38,6 +38,7 @@ import com.stepstone.stepper.VerificationError;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,7 +51,11 @@ public class SignatureFragment extends Fragment implements Step, BlockingStep {
 
 
     private SignaturePad signature_applicant;
+    private SignaturePad signature_coapplicant;
     private Button btnclear_sig1;
+    private Button btnclear_sig2;
+    private EditText edt_remark;
+    private CreatePdf createPdf;
 
 
     @Override
@@ -58,13 +63,17 @@ public class SignatureFragment extends Fragment implements Step, BlockingStep {
         view = inflater.inflate(R.layout.fragment_form_signature, container, false);
         viewWebView(view);
         initUI(view);
+        createPdf=new CreatePdf(getActivity());
         return view;
     }
 
     private void initUI(View view) {
 
         signature_applicant = view.findViewById(R.id.signature_applicant);
+        signature_coapplicant = view.findViewById(R.id.signature_coapplicant);
+        edt_remark=view.findViewById(R.id.edt_remark);
         btnclear_sig1 = view.findViewById(R.id.btnclear_sig1);
+        btnclear_sig2 = view.findViewById(R.id.btnclear_sig2);
         signature_applicant.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
@@ -73,6 +82,7 @@ public class SignatureFragment extends Fragment implements Step, BlockingStep {
 
             @Override
             public void onSigned() {
+                btnclear_sig1.setEnabled(true);
             }
 
             @Override
@@ -80,13 +90,34 @@ public class SignatureFragment extends Fragment implements Step, BlockingStep {
                 btnclear_sig1.setEnabled(false);
             }
         });
+        signature_coapplicant.setOnSignedListener(new SignaturePad.OnSignedListener() {
+            @Override
+            public void onStartSigning() {
+                Toast.makeText(getActivity(), "OnStartSigning", Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onSigned() {
+                btnclear_sig2.setEnabled(true);
+            }
+
+            @Override
+            public void onClear() {
+                btnclear_sig2.setEnabled(false);
+            }
+        });
 
 
         btnclear_sig1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signature_applicant.clear();
+            }
+        });
+        btnclear_sig2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signature_coapplicant.clear();
             }
         });
 
@@ -106,8 +137,12 @@ public class SignatureFragment extends Fragment implements Step, BlockingStep {
 //        CreatePdf.createDocument(getActivity());
 //        Toast.makeText(getActivity(), "Pdf Saved on Jewelines_pdf", Toast.LENGTH_SHORT).show();
 
-        saveData();
-        CreatePdf.createDocument(getActivity());
+        try {
+            saveData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        createPdf.createDocument(getActivity());
 
     }
 
@@ -132,25 +167,31 @@ public class SignatureFragment extends Fragment implements Step, BlockingStep {
 
     }
 
-    private void saveData() {
+    private void saveData() throws IOException {
+        AppConstant.general_inifo.add("Remarks" + ";" +
+                edt_remark.getText().toString()+" ");
         Bitmap signatureBitmap = signature_applicant.getSignatureBitmap();
-        if (addJpgSignatureToGallery(signatureBitmap)) {
+        Bitmap signatureBitmap1 = signature_coapplicant.getSignatureBitmap();
+        addJpgSignatureToGallery(signatureBitmap,"Signature_1.jpg");
+        addJpgSignatureToGallery(signatureBitmap1,"Signature_2.jpg");
+
+
+        /*if (addJpgSignatureToGallery(signatureBitmap,"Signature_1.jpg")) {
             Toast.makeText(getActivity(), "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getActivity(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
-    public boolean addJpgSignatureToGallery(Bitmap signature) {
-        boolean result = false;
+    public void addJpgSignatureToGallery(Bitmap signature,String imageName) {
+//        boolean result = false;
         try {
-            File photo = new File(getAlbumStorageDir(), "Signature_1.jpg");
+            File photo = new File(getAlbumStorageDir(), imageName);
             saveBitmapToJPG(signature, photo);
-//            scanMediaFile(photo);
-            result = true;
+//            result = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
+//        return result;
     }
 
     public File getAlbumStorageDir() {
@@ -171,11 +212,6 @@ public class SignatureFragment extends Fragment implements Step, BlockingStep {
         newBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
         stream.close();
     }
-    private void scanMediaFile(File photo) {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri contentUri = Uri.fromFile(photo);
-        mediaScanIntent.setData(contentUri);
-        getActivity().sendBroadcast(mediaScanIntent);
-    }
+
 
 }

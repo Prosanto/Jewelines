@@ -1,7 +1,11 @@
 package com.Jewelines.app.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
@@ -18,32 +22,40 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.List;
 import com.itextpdf.text.ListItem;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfPage;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class CreatePdf {
     private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
-    private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
-            Font.NORMAL, BaseColor.RED);
+    private static Font smallFontBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+            Font.BOLD);
     private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
             Font.BOLD);
-    private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
-            Font.BOLD);
+    private static Font smallFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+            Font.NORMAL);
 
-    private CreatePdf() {
-
+    private Activity activity;
+    public CreatePdf(Activity _activity) {
+        this.activity = _activity;
     }
 
 
-    public static void createDocument(Context mContext) {
+    public void createDocument(Context mContext) {
         try {
 
             String root = Environment.getExternalStorageDirectory().toString();
@@ -57,6 +69,7 @@ public class CreatePdf {
             document.open();
             addMetaData(document);
 //            addTitlePage(document);
+            addHeader(document);
             addApplicationInfromation(document);
             addLocationInfromation(document);
             addCoastelInfromation(document);
@@ -104,7 +117,7 @@ public class CreatePdf {
         addEmptyLine(subPara, 1);
         document.add(subPara);
         createTable(document, AppConstant.appInfo, 2);
-        addEmptyLine(subPara, 1);
+        addEmptyLine(subPara, 2);
 
     }
 
@@ -115,7 +128,7 @@ public class CreatePdf {
         document.add(subPara);
         createTable(document, AppConstant.locationInfo_1, 2);
         Paragraph paraGraph = new Paragraph("", subFont);
-        addEmptyLine(paraGraph, 1);
+        addEmptyLine(paraGraph, 2);
         document.add(paraGraph);
         createTable(document, AppConstant.locationInfo_2, 3);
 
@@ -124,7 +137,7 @@ public class CreatePdf {
     public static void addCoastelInfromation(Document document) throws DocumentException {
 
         Paragraph subPara = new Paragraph("For Coastal Locations", subFont);
-        addEmptyLine(subPara, 1);
+        addEmptyLine(subPara, 2);
         document.add(subPara);
         createTable(document, AppConstant.coastal_location, 3);
 
@@ -133,24 +146,28 @@ public class CreatePdf {
     public static void addGeneralInfromation(Document document) throws DocumentException, IOException {
 
         Paragraph subPara = new Paragraph("General Information", subFont);
-        addEmptyLine(subPara, 1);
+        addEmptyLine(subPara, 2);
         document.add(subPara);
         createTable(document, AppConstant.general_inifo, 2);
+        addEmptyLine(subPara, 2);
+        Phrase phraseBold = new Phrase("Notice of Insurance Information Practice\n ", smallFontBold);
+        document.add(phraseBold);
+        Phrase phrase = new Phrase("Personal information about you may be collected from persons other than you. Such information as well as other personal and privileged information collected by us or our agents may in certain circumstances be disclosed to third parties. You have the right to review your personal information in our fle and can request correction of any inaccuracies. A more detailed description of your rights and our practices regarding such information is available upon request. Contact your agent or broker for instruction on how to submit a request to us.", smallFont);
+        document.add(phrase);
         createSignatureTable(document);
-
-        addEmptyLine(subPara, 1);
 
     }
 
     public static void addLossInfromation(Document document) throws DocumentException {
 
         Paragraph subPara = new Paragraph("Loss History", subFont);
-        addEmptyLine(subPara, 1);
+        addEmptyLine(subPara, 2);
         document.add(subPara);
         createTable(document, AppConstant.loss_historydate, 4);
         addEmptyLine(subPara, 1);
 
     }
+
 
     public static void createTable(Document subCatPart, ArrayList<String> myList, int tableRow)
             throws DocumentException {
@@ -205,27 +222,67 @@ public class CreatePdf {
 
     }
 
+    public void addHeader(Document document) throws DocumentException, IOException {
+        Paragraph empty = new Paragraph("", catFont);
+        addEmptyLine(empty, 1);
+        document.add(empty);
+        Paragraph subPara = new Paragraph("Jewel Insurance Application Form", catFont);
+        subPara.setAlignment(Element.ALIGN_CENTER);
+        addEmptyLine(subPara, 1);
 
-    public static void createSignatureTable(Document subCatPart)
-            throws DocumentException, IOException {
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/Jewelines_pdf");
         myDir.mkdirs();
-        String fname = "Signature_1" + ".jpg";
+        String fname = "logo" + ".png";
         File filePDD = new File(myDir, fname);
-        String pdfFilename = filePDD.getAbsolutePath();
-        if(filePDD.exists()){
+        String filename = filePDD.getAbsolutePath();
+        Image img = Image.getInstance(filename);
+
+        if (filePDD.exists()) {
             Log.i("pdfFilename", "" + "File Exist");
-        }else {
+        } else {
             Log.i("pdfFilename", "" + "File  not Exist");
         }
 
+        img.setAbsolutePosition(430, 780);
+        img.scalePercent(105);
+        img.setAlignment(Element.ALIGN_RIGHT);
+        document.add(img);
+        document.add(subPara);
+
+
+        PdfPTable table = new PdfPTable(1);
+        table.setWidthPercentage(110);
+        PdfPCell cell = new PdfPCell(new Phrase(""));
+        table.addCell(cell);
+
+        document.add(table);
+
+        document.add(empty);
+
+
+    }
+
+    public static void createSignatureTable(Document subCatPart)
+            throws DocumentException, IOException {
+
+
         PdfPTable table = new PdfPTable(2);
         table.setWidthPercentage(100);
-        table.addCell(createImageCell(pdfFilename));
-        table.addCell(createImageCell(pdfFilename));
-        subCatPart.add(table);
 
+        table.addCell(createTextCell(""));
+        table.addCell(createTextCell(""));
+        table.addCell(createTextCell(""));
+        table.addCell(createTextCell(""));
+        table.addCell(createImageCell(getFileName("Signature_1")));
+        table.addCell(createImageCell(getFileName("Signature_2")));
+        table.addCell(createTextCell("Signature of Applicant"));
+        table.addCell(createTextCell("Signature of Co Applicant"));
+        table.addCell(createTextCell("Date  03 Feb 1988"));
+        table.addCell(createTextCell("Date  03 Feb 1988"));
+
+
+        subCatPart.add(table);
 
 
     }
@@ -233,6 +290,15 @@ public class CreatePdf {
     public static PdfPCell createImageCell(String path) throws DocumentException, IOException {
         Image img = Image.getInstance(path);
         PdfPCell cell = new PdfPCell(img, true);
+        cell.setBorder(Rectangle.NO_BORDER);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        return cell;
+    }
+
+    public static PdfPCell createTextCell(String string) throws DocumentException, IOException {
+        PdfPCell cell = new PdfPCell(new Phrase(string));
+        cell.setBorder(Rectangle.NO_BORDER);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         return cell;
     }
 
@@ -248,6 +314,24 @@ public class CreatePdf {
         for (int i = 0; i < number; i++) {
             paragraph.add(new Paragraph(" "));
         }
+    }
+
+    public static String getFileName(String string) throws IOException, BadElementException {
+        String filename = "";
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/Jewelines_pdf");
+        myDir.mkdirs();
+        String fname = string + ".jpg";
+        File filePDD = new File(myDir, fname);
+        filename = filePDD.getAbsolutePath();
+        Image img = Image.getInstance(filename);
+        if (filePDD.exists()) {
+            Log.i("pdfFilename", "" + "File Exist");
+        } else {
+            Log.i("pdfFilename", "" + "File  not Exist");
+        }
+
+        return filename;
     }
 
 

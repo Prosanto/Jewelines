@@ -3,8 +3,10 @@ package com.Jewelines.app.formfragment;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +30,11 @@ import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -346,7 +353,7 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 requestPermissions(params, REQUEST_CODE_ASK_PERMISSIONS_STORGE);
             } else {
                 saveData();
-
+                copyAssets();
                 //getActivity().finish();
 
             }
@@ -359,6 +366,7 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
                 if (grantResults.length > 0) {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         saveData();
+                        copyAssets();
 
                        // getActivity().finish();
                     } else {
@@ -410,5 +418,55 @@ public class GeneralInformationFragment extends Fragment implements Step, Blocki
 
 
 
+    }
+
+    private void copyAssets() {
+        AssetManager assetManager = getActivity().getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list("");
+        } catch (IOException e) {
+            Log.e("tag", "Failed to get asset file list.", e);
+        }
+        if (files != null) for (String filename : files) {
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = assetManager.open(filename);
+//                File outFile = new File(getActivity().getExternalFilesDir(null), filename);
+                String root = Environment.getExternalStorageDirectory().toString();
+                File myDir = new File(root + "/Jewelines_pdf");
+                myDir.mkdirs();
+                String fname = "logo" + ".png";
+                File filePDD = new File(myDir, fname);
+                out = new FileOutputStream(filePDD);
+                copyFile(in, out);
+            } catch(IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + filename, e);
+            }
+            finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        // NOOP
+                    }
+                }
+                if (out != null) {
+                    try {
+                        out.close();
+                    } catch (IOException e) {
+                        // NOOP
+                    }
+                }
+            }
+        }
+    }
+    private void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
     }
 }
