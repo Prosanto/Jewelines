@@ -46,16 +46,21 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class SignatureFragment extends Fragment implements Step, BlockingStep {
+public class SignatureFragment extends Fragment implements Step, BlockingStep, View.OnClickListener {
     private View view;
 
-
+    final Calendar myCalendar = Calendar.getInstance();
+    DatePickerDialog date;
+    private String married_status = "";
+    private int year, month, day;
     private SignaturePad signature_applicant;
     private SignaturePad signature_coapplicant;
     private Button btnclear_sig1;
     private Button btnclear_sig2;
     private EditText edt_remark;
     private CreatePdf createPdf;
+    private EditText date_applicant;
+    private EditText date_coapplicant;
 
 
     @Override
@@ -71,9 +76,14 @@ public class SignatureFragment extends Fragment implements Step, BlockingStep {
 
         signature_applicant = view.findViewById(R.id.signature_applicant);
         signature_coapplicant = view.findViewById(R.id.signature_coapplicant);
+        date_applicant=view.findViewById(R.id.date_applicant);
+        date_coapplicant=view.findViewById(R.id.date_coapplicant);
         edt_remark=view.findViewById(R.id.edt_remark);
         btnclear_sig1 = view.findViewById(R.id.btnclear_sig1);
         btnclear_sig2 = view.findViewById(R.id.btnclear_sig2);
+
+        date_applicant.setOnClickListener(this);
+        date_coapplicant.setOnClickListener(this);
         signature_applicant.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
@@ -143,6 +153,7 @@ public class SignatureFragment extends Fragment implements Step, BlockingStep {
             e.printStackTrace();
         }
         createPdf.createDocument(getActivity());
+        getActivity().finish();
 
     }
 
@@ -166,10 +177,36 @@ public class SignatureFragment extends Fragment implements Step, BlockingStep {
     public void onError(@NonNull VerificationError error) {
 
     }
+    private void datePick(final EditText ed) {
+        final Calendar cq = Calendar.getInstance();
+        year = cq.get(Calendar.YEAR);
+        month = cq.get(Calendar.MONTH);
+        day = cq.get(Calendar.DAY_OF_MONTH);
+        date = new DatePickerDialog(getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        ed.setText(updateLabel());
+                    }
+                }, year, month, day);
+        date.show();
 
+    }
+    private String updateLabel() {
+        String myFormat = "d MMM yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        return "" + sdf.format(myCalendar.getTime());
+    }
     private void saveData() throws IOException {
         AppConstant.general_inifo.add("Remarks" + ";" +
                 edt_remark.getText().toString()+" ");
+
+
+        AppConstant.signature_applicant="Date:      "+date_applicant.getText().toString().trim();
+        AppConstant.signature_coapplicant="Date:      "+date_coapplicant.getText().toString().trim();
         Bitmap signatureBitmap = signature_applicant.getSignatureBitmap();
         Bitmap signatureBitmap1 = signature_coapplicant.getSignatureBitmap();
         addJpgSignatureToGallery(signatureBitmap,"Signature_1.jpg");
@@ -214,4 +251,17 @@ public class SignatureFragment extends Fragment implements Step, BlockingStep {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.date_applicant:
+                datePick(date_applicant);
+                break;
+
+            case R.id.date_coapplicant:
+                datePick(date_coapplicant);
+                break;
+        }
+    }
 }

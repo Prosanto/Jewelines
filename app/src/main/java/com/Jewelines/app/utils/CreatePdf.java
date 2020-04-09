@@ -278,8 +278,8 @@ public class CreatePdf {
         table.addCell(createImageCell(getFileName("Signature_2")));
         table.addCell(createTextCell("Signature of Applicant"));
         table.addCell(createTextCell("Signature of Co Applicant"));
-        table.addCell(createTextCell("Date  03 Feb 1988"));
-        table.addCell(createTextCell("Date  03 Feb 1988"));
+        table.addCell(createTextCell(AppConstant.signature_applicant));
+        table.addCell(createTextCell(AppConstant.signature_coapplicant));
 
 
         subCatPart.add(table);
