@@ -11,6 +11,7 @@ import com.Jewelines.app.fragment.AbouttusFragment;
 import com.Jewelines.app.fragment.ContactusFragment;
 import com.Jewelines.app.fragment.CustomQuoteFragment;
 import com.Jewelines.app.fragment.QuoteFragment;
+import com.Jewelines.app.fragment.SettingsFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -102,6 +103,11 @@ public class HomeActivity extends AppCompatActivity
         else if (id == R.id.nav_customquote) {
             replessFragment(3);
         }
+        else if (id == R.id.nav_settings) {
+            replessFragment(4);
+        }
+
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -122,6 +128,10 @@ public class HomeActivity extends AppCompatActivity
         else if (type == 3) {
             fragment = new CustomQuoteFragment();
             toolbar_title.setText("" + getResources().getString(R.string.menu_customquote));
+        }
+        else if (type == 4) {
+            fragment = new SettingsFragment();
+            toolbar_title.setText("" + getResources().getString(R.string.menu_settings));
         }
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();

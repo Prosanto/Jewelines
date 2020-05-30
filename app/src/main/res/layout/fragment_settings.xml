@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Quote Rate Into ZipCode"
+                android:textSize="@dimen/normal_text_size">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/edit_QuoteRate"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_corner_inputwhitet"
+                android:hint=""
+                android:inputType="numberDecimal"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/normal_text_size">
+
+            </EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Quote Rate Outside ZipCode"
+                android:textSize="@dimen/normal_text_size">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/edit_QuoteRate_Outside"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_corner_inputwhitet"
+                android:hint=""
+                android:inputType="numberDecimal"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/normal_text_size">
+
+            </EditText>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Compair Quote Rate"
+                android:textSize="@dimen/normal_text_size">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/edit_CompairQuoteRate"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_corner_inputwhitet"
+                android:hint=""
+                android:inputType="numberDecimal"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/normal_text_size">
+
+            </EditText>
+
+
+            <LinearLayout
+                android:id="@+id/layoutSave"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_button"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:textColor="@color/white"
+                    android:textSize="16dp">
+
+                </TextView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

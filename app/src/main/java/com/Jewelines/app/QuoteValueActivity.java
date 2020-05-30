@@ -1,6 +1,7 @@
 package com.Jewelines.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.Jewelines.app.mailsend.GMailSender;
+import com.Jewelines.app.utils.PersistentUser;
 
 import java.util.HashMap;
 
@@ -69,6 +71,19 @@ public class QuoteValueActivity extends AppCompatActivity {
                 showDialogSendQuote();
             }
         });
+        textQuotevalue.setTag("0");
+        findViewById(R.id.layoutPayment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Quotevalue =textQuotevalue.getTag().toString();
+                Intent mm = new Intent(QuoteValueActivity.this, PaymentActivity.class);
+                mm.putExtra("Quotevalue",Quotevalue);
+                startActivity(mm);
+
+            }
+        });
+
+
         validation();
 
     }
@@ -115,23 +130,30 @@ public class QuoteValueActivity extends AppCompatActivity {
     }
 
     public void validation() {
+        double QuoteRate = Double.parseDouble(PersistentUser.getQuoteRate(mContext));
+        double OutSieQuoteRate = Double.parseDouble(PersistentUser.getWihtiutZipQuoteRate(mContext));
+        double CompairQuoteRate = Double.parseDouble(PersistentUser.getCompairQuoteRate(mContext));
+
+
         float quoteValue = 0;
         if (allZipcodeArray.containsKey(zipcode)) {
-            quoteValue = (float) ((Double.parseDouble(value) * 1.3));
-            quoteValue=quoteValue/100;
+            quoteValue = (float) ((Double.parseDouble(value) * QuoteRate));
+            quoteValue = quoteValue / 100;
         } else {
-            quoteValue = (float) ((Double.parseDouble(value) * 1.4));
-            quoteValue=quoteValue/100;
+            quoteValue = (float) ((Double.parseDouble(value) * OutSieQuoteRate));
+            quoteValue = quoteValue / 100;
 
         }
-        float quoteCompaireValue = (float) ((Double.parseDouble(value) * 2));
-        quoteCompaireValue=quoteCompaireValue/100;
+        float quoteCompaireValue = (float) ((Double.parseDouble(value) * CompairQuoteRate));
+        quoteCompaireValue = quoteCompaireValue / 100;
 
         int quoteValueInterger = (int) quoteValue;
         int quoteCompaireValueInterger = (int) quoteCompaireValue;
 
         textQuotevalue.setText("$" + quoteValueInterger);
         textCompareQuotevalue.setText("$" + quoteCompaireValueInterger);
+
+        textQuotevalue.setTag(""+quoteValueInterger);
     }
 
 
